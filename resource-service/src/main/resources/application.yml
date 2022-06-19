@@ -1,0 +1,8 @@
+
+spring:
+#  profiles: dev
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 15MB
+      max-request-size: 15MB
