@@ -6,3 +6,7 @@ spring:
       enabled: true
       max-file-size: 15MB
       max-request-size: 15MB
+
+aws.s3:
+  endpoint-url: http://localhost:4572
+  bucket-name: resources

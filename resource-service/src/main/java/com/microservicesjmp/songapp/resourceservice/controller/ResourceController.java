@@ -1,8 +1,7 @@
 package com.microservicesjmp.songapp.resourceservice.controller;
 
-import com.microservicesjmp.songapp.resourceservice.entity.ResourceTracking;
-import com.microservicesjmp.songapp.resourceservice.repository.ResourceRepository;
 import com.microservicesjmp.songapp.resourceservice.service.ResourceTrackingService;
+import com.microservicesjmp.songapp.resourceservice.service.S3StorageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +18,7 @@ import java.util.Map;
 @RequestMapping("/resources")
 public class ResourceController {
 
-//    private final ResourceRepository resourceRepository;
+    private final S3StorageService s3StorageService;
     private final ResourceTrackingService resourceTrackingService;
 
     @PostMapping(path = "",
@@ -31,7 +30,7 @@ public class ResourceController {
         responseMap.put("id", 3);
         try {
             final byte[] bytes = audioBinary.getBytes();
-            System.out.println("");
+            System.out.println();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -50,7 +49,7 @@ public class ResourceController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> deleteResources(@RequestParam("id") String songIdsCsv) {
         final Map<String, List<Integer>> responseMap = new HashMap<>();
-        responseMap.put("ids", List.of(2,3,4,5));
+        responseMap.put("ids", List.of(2, 3, 4, 5));
         return ResponseEntity.ok(responseMap);
     }
 }
