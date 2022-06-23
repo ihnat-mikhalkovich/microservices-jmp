@@ -1,0 +1,10 @@
+
+spring:
+  #  profiles: dev
+  datasource:
+    hikari:
+      connectionTimeout: 20000
+      maximumPoolSize: 5
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/postgres}
+    username: ${SONG_SERVICE_DB_USERNAME:postgres}
+    password: ${SONG_SERVICE_DB_PASSWORD:nimda}
