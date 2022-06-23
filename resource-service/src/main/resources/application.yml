@@ -6,8 +6,8 @@ spring:
       connectionTimeout: 20000
       maximumPoolSize: 5
     url: ${DB_URL:jdbc:postgresql://localhost:5432/postgres}
-    username: ${DB_USERNAME:postgres}
-    password: ${DB_PASSWORD:nimda}
+    username: ${RESOURCE_SERVICE_DB_USERNAME:postgres}
+    password: ${RESOURCE_SERVICE_DB_PASSWORD:nimda}
   servlet:
     multipart:
       enabled: true
