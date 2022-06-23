@@ -1,9 +1,6 @@
 package com.microservicesjmp.songapp.resourceservice.config;
 
-import com.amazonaws.auth.AWSStaticCredentialsProvider;
-import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.client.builder.AwsClientBuilder;
-import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,10 +13,16 @@ public class S3ClientConfiguration {
     @Value("${aws.s3.endpoint-url}")
     private String endpointUrl;
 
+    @Value("${aws.s3.region}")
+    private String region;
+
     @Bean
-    AmazonS3 amazonS3() {
-        AwsClientBuilder.EndpointConfiguration endpointConfiguration = new AwsClientBuilder.EndpointConfiguration(endpointUrl,
-                Regions.US_EAST_1.getName());
-        return AmazonS3ClientBuilder.standard().withEndpointConfiguration(endpointConfiguration).withPathStyleAccessEnabled(true).build();
+    public AmazonS3 amazonS3() {
+        final AwsClientBuilder.EndpointConfiguration endpointConfiguration = new AwsClientBuilder.EndpointConfiguration(endpointUrl,
+                region);
+        return AmazonS3ClientBuilder.standard()
+                .withEndpointConfiguration(endpointConfiguration)
+                .withPathStyleAccessEnabled(true)
+                .build();
     }
 }

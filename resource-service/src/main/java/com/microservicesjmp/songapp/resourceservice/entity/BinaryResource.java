@@ -8,12 +8,13 @@ import lombok.NoArgsConstructor;
 import java.io.InputStream;
 
 @Data
-@Builder
-@NoArgsConstructor
 @AllArgsConstructor
-public class DownloadedResource {
-    private String id;
-    private String fileName;
-    private Long contentLength;
+@NoArgsConstructor
+@Builder
+public class BinaryResource {
+    private int id;
+    private String name;
+    private String extension;
+    private long size;
     private InputStream inputStream;
 }

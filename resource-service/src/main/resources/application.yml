@@ -1,6 +1,13 @@
 
 spring:
 #  profiles: dev
+  datasource:
+    hikari:
+      connectionTimeout: 20000
+      maximumPoolSize: 5
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/postgres}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:nimda}
   servlet:
     multipart:
       enabled: true
@@ -8,5 +15,6 @@ spring:
       max-request-size: 15MB
 
 aws.s3:
-  endpoint-url: http://localhost:4572
+  endpoint-url: http://localhost:4566
+  region: us-east-1
   bucket-name: resources
