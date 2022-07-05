@@ -3,18 +3,27 @@ spring:
 #  profiles: dev
   datasource:
     hikari:
-      connectionTimeout: 20000
-      maximumPoolSize: 5
-    url: ${DB_URL:jdbc:postgresql://localhost:5432/postgres}
-    username: ${RESOURCE_SERVICE_DB_USERNAME:postgres}
-    password: ${RESOURCE_SERVICE_DB_PASSWORD:nimda}
+      connectionTimeout: ${HIKARI_CONNECTION_TIMEOUT:20000}
+      maximumPoolSize: ${HIKARI_POOL_SIZE:5}
+    url: ${TRACKING_DB_URL:jdbc:postgresql://localhost:5432/postgres}
+    username: ${TRACKING_DB_USERNAME:postgres}
+    password: ${TRACKING_DB_PASSWORD:nimda}
   servlet:
     multipart:
       enabled: true
       max-file-size: 15MB
       max-request-size: 15MB
+  rabbitmq:
+    host: ${RABBITMQ_HOST:localhost}
+    port: ${RABBITMQ_PORT:5672}
+    username: ${RABBITMQ_USERNAME:myuser}
+    password: ${RABBITMQ_PASSWORD:mypassword}
+
+rabbitmq.queue.name: ${RABBITMQ_QUEUE_NAME:song-app}
+rabbitmq.queue.exchange.name: ${RABBITMQ_EXCHANGE_NAME:back-request}
 
 aws.s3:
-  endpoint-url: http://localhost:4566
-  region: us-east-1
-  bucket-name: resources
+  endpoint-url: ${S3_URL:http://localhost:4566}
+  region: ${S3_REGION:us-east-1}
+  bucket-name: ${S3_BUCKET_NAME:resources}
+

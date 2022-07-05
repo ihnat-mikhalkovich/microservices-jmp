@@ -15,15 +15,15 @@ import java.io.FileNotFoundException;
 public class ResourceProcessorApplication {
 
 	public static void main(String[] args) throws FileNotFoundException {
-		final ConfigurableApplicationContext run =
+//		final ConfigurableApplicationContext run =
 				SpringApplication.run(ResourceProcessorApplication.class, args);
-
-		final Mp3MetadataExtractor extractor = run.getBean(Mp3MetadataExtractor.class);
-
-		final File file = ResourceUtils.getFile("classpath:songs/thanks.mp3");
-		final FileInputStream inputStream = new FileInputStream(file);
-		final SongMetadata metadata = extractor.extract(inputStream);
-		System.out.println(metadata);
+//
+//		final Mp3MetadataExtractor extractor = run.getBean(Mp3MetadataExtractor.class);
+//
+//		final File file = ResourceUtils.getFile("classpath:songs/thanks.mp3");
+//		final FileInputStream inputStream = new FileInputStream(file);
+//		final SongMetadata metadata = extractor.extract(inputStream);
+//		System.out.println(metadata);
 	}
 
 }

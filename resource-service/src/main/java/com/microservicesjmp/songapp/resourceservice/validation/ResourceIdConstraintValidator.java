@@ -1,6 +1,6 @@
 package com.microservicesjmp.songapp.resourceservice.validation;
 
-import com.microservicesjmp.songapp.resourceservice.service.storage.BinaryStorageService;
+import com.microservicesjmp.songapp.resourceservice.service.storage.impl.BinaryStorageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

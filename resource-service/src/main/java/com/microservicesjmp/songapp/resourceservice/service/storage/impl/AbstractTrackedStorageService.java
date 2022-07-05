@@ -1,6 +1,7 @@
-package com.microservicesjmp.songapp.resourceservice.service.storage;
+package com.microservicesjmp.songapp.resourceservice.service.storage.impl;
 
 import com.microservicesjmp.songapp.resourceservice.entity.BinaryResource;
+import com.microservicesjmp.songapp.resourceservice.service.storage.TrackedStorageService;
 import com.microservicesjmp.songapp.resourceservice.service.tracking.ResourceTrackingService;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

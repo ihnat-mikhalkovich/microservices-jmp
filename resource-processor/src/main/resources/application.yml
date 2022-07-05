@@ -1,0 +1,14 @@
+spring:
+  rabbitmq:
+    host: ${RABBITMQ_HOST:localhost}
+    port: ${RABBITMQ_PORT:5672}
+    username: ${RABBITMQ_USERNAME:myuser}
+    password: ${RABBITMQ_PASSWORD:mypassword}
+
+rabbitmq.queue.name: ${RABBITMQ_QUEUE_NAME:song-app}
+rabbitmq.queue.exchange.name: ${RABBITMQ_EXCHANGE_NAME:back-request}
+rabbitmq.queue.dead-queue-name: ${RABBITMQ_DEAD_QUEUE_NAME:dead-queue}
+
+communication:
+  song-service-root-url: http://localhost:8083
+  resource-service-root-url: http://localhost:8082

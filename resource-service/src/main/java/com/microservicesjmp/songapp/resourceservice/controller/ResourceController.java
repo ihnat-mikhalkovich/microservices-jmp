@@ -1,6 +1,8 @@
 package com.microservicesjmp.songapp.resourceservice.controller;
 
 import com.microservicesjmp.songapp.resourceservice.entity.BinaryResource;
+import com.microservicesjmp.songapp.resourceservice.entity.Message;
+import com.microservicesjmp.songapp.resourceservice.service.message.MessageService;
 import com.microservicesjmp.songapp.resourceservice.service.storage.TrackedStorageService;
 import com.microservicesjmp.songapp.resourceservice.validation.MP3Part;
 import com.microservicesjmp.songapp.resourceservice.validation.ResourceId;
@@ -9,6 +11,7 @@ import org.hibernate.validator.constraints.Length;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -25,14 +28,18 @@ import java.util.stream.Stream;
 @RequestMapping("/resources")
 @Validated
 public class ResourceController {
-    private final TrackedStorageService storageService;
     public static final int MAX_IDS_CSV_LENGTH = 200;
+    private final TrackedStorageService storageService;
+    private final MessageService messageService;
 
     @PostMapping(path = "",
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> createResource(@MP3Part @RequestPart MultipartFile audioBinary) {
         final int id = storageService.save(audioBinary);
+
+        final Message message = new Message(HttpMethod.GET, "/resources/" + id);
+        messageService.send(message);
 
         final Map<String, Integer> responseMap = new HashMap<>();
         responseMap.put("id", id);
@@ -56,6 +63,9 @@ public class ResourceController {
         final List<Integer> ids = this.getIds(songIdsCsv);
 
         storageService.delete(ids);
+
+        final Message message = new Message(HttpMethod.DELETE, "/resources/ids=" + ids);
+        messageService.send(message);
 
         final Map<String, List<Integer>> responseMap = new HashMap<>();
         responseMap.put("ids", ids);

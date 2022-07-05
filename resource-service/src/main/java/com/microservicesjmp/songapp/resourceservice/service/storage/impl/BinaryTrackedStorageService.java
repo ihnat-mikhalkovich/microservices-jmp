@@ -1,4 +1,4 @@
-package com.microservicesjmp.songapp.resourceservice.service.storage;
+package com.microservicesjmp.songapp.resourceservice.service.storage.impl;
 
 import com.microservicesjmp.songapp.resourceservice.entity.BinaryResource;
 import com.microservicesjmp.songapp.resourceservice.service.tracking.ResourceTrackingService;
