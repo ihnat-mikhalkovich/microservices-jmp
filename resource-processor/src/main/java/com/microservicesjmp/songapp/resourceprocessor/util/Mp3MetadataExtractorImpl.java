@@ -2,6 +2,7 @@ package com.microservicesjmp.songapp.resourceprocessor.util;
 
 import com.microservicesjmp.songapp.resourceprocessor.entity.SongMetadata;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.tika.exception.TikaException;
 import org.apache.tika.metadata.Metadata;
 import org.apache.tika.parser.ParseContext;
@@ -10,11 +11,11 @@ import org.springframework.stereotype.Service;
 import org.xml.sax.ContentHandler;
 import org.xml.sax.SAXException;
 
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class Mp3MetadataExtractorImpl implements Mp3MetadataExtractor {
 
     private final ContentHandler handler;
@@ -25,6 +26,20 @@ public class Mp3MetadataExtractorImpl implements Mp3MetadataExtractor {
     public SongMetadata extract(InputStream inputStream) {
         final Metadata metadata = parse(inputStream);
         return this.mapMetadata(metadata);
+    }
+
+    @Override
+    public SongMetadata extract(File file) {
+        final FileInputStream inputStream;
+        try {
+            inputStream = new FileInputStream(file);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+        final SongMetadata metadata = this.extract(inputStream);
+        log.debug("metadata: {}", metadata);
+        return metadata;
     }
 
     private Metadata parse(InputStream inputStream) {
