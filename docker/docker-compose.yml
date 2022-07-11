@@ -1,13 +1,13 @@
 version: "3.8"
-
+#host: host.docker.internal
 services:
   localstack:
     image: localstack/localstack
     ports:
       - "4566:4566"
     environment:
-      - SERVICES=s3
-      - DOCKER_HOST=unix:///var/run/docker.sock
+      SERVICES: s3
+      DOCKER_HOST: unix:///var/run/docker.sock
     volumes:
       - "${TMPDIR:-/tmp/localstack}:/tmp/localstack"
       - "/var/run/docker.sock:/var/run/docker.sock"
@@ -20,3 +20,27 @@ services:
     ports:
       - '5672:5672'
       - '15672:15672'
+  song-db:
+    container_name: song_pg
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: nimda
+      POSTGRES_DB: song_db
+    volumes:
+      - ./setup/db/song/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
+    ports:
+      - "5433:5432"
+  tracking-db:
+    container_name: tracking_pg
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: nimda
+      POSTGRES_DB: tracking_db
+    volumes:
+      - ./setup/db/tracking/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
+    ports:
+      - "5434:5432"

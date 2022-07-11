@@ -8,6 +8,5 @@ import java.util.List;
 
 public record Message(
         @JsonProperty HttpMethod method,
-        @JsonProperty String url,
-        @JsonProperty List<Integer> ids
+        @JsonProperty String url
         ) implements Serializable {}

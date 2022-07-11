@@ -1,3 +1,5 @@
+server:
+  port: 8082
 
 spring:
 #  profiles: dev
@@ -5,7 +7,7 @@ spring:
     hikari:
       connectionTimeout: ${HIKARI_CONNECTION_TIMEOUT:20000}
       maximumPoolSize: ${HIKARI_POOL_SIZE:5}
-    url: ${TRACKING_DB_URL:jdbc:postgresql://localhost:5432/postgres}
+    url: ${TRACKING_DB_URL:jdbc:postgresql://localhost:5434/tracking_db}
     username: ${TRACKING_DB_USERNAME:postgres}
     password: ${TRACKING_DB_PASSWORD:nimda}
   servlet:
