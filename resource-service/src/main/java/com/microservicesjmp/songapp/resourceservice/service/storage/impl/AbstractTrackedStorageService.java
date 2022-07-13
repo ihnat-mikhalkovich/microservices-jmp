@@ -48,6 +48,7 @@ public abstract class AbstractTrackedStorageService implements TrackedStorageSer
     @Override
     public void delete(List<Integer> ids) {
         processDelete(ids);
+        trackingService.deleteAllById(ids);
     }
 
     @Override

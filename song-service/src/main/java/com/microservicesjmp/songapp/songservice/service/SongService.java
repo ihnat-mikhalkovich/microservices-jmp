@@ -10,6 +10,7 @@ public interface SongService {
     Optional<Song> getById(int id);
     Song update(Song song);
     void deleteById(int id);
-    void deleteByIds(List<Integer> ids);
+    void deleteAllById(List<Integer> ids);
+    void deleteAllByResourceId(List<Integer> ids);
     boolean existsById(int id);
 }

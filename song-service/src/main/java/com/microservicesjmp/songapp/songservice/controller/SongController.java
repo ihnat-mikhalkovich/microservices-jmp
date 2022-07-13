@@ -48,7 +48,7 @@ public class SongController {
     public ResponseEntity<?> deleteSongsByIds(@Length(min = 1, max = MAX_IDS_CSV_LENGTH) @RequestParam("id") String songIdsCsv) {
         final List<Integer> ids = this.getIds(songIdsCsv);
 
-        songService.deleteByIds(ids);
+        songService.deleteAllById(ids);
 
         final Map<String, List<Integer>> responseMap = new HashMap<>();
         responseMap.put("ids", ids);

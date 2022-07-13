@@ -35,8 +35,13 @@ public class SongServiceImpl implements SongService {
     }
 
     @Override
-    public void deleteByIds(List<Integer> ids) {
-        repository.deleteAllById(ids);
+    public void deleteAllById(List<Integer> ids) {
+        repository.deleteAllByIdInBatch(ids);
+    }
+
+    @Override
+    public void deleteAllByResourceId(List<Integer> ids) {
+        repository.deleteByResourceIdIn(ids);
     }
 
     @Override

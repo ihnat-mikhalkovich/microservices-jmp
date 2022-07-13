@@ -3,6 +3,7 @@ package com.microservicesjmp.songapp.resourceservice.service.tracking;
 import com.microservicesjmp.songapp.resourceservice.entity.ResourceTracking;
 import org.springframework.lang.NonNull;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface ResourceTrackingService {
@@ -22,4 +23,8 @@ public interface ResourceTrackingService {
     void inProgress(int id);
 
     void done(int id);
+
+    void delete(int id);
+
+    void deleteAllById(List<Integer> ids);
 }

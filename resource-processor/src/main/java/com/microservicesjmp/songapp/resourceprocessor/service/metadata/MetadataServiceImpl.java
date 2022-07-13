@@ -8,6 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -23,5 +26,16 @@ public class MetadataServiceImpl implements MetadataService {
         final String songsUrl = songServiceUrl + ENDPOINT;
         final ResponseEntity<String> response = restTemplate.postForEntity(songsUrl, metadata, String.class);
         log.debug(response.toString());
+    }
+
+    @Override
+    public void deleteMetadata(List<Integer> ids) {
+        final String joined = ids.stream()
+                .map(Object::toString)
+                .collect(Collectors.joining(","));
+
+        final String url = songServiceUrl + ENDPOINT + "/?id=" + joined;
+
+        restTemplate.delete(url);
     }
 }

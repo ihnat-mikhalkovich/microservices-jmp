@@ -6,6 +6,7 @@ import com.microservicesjmp.songapp.resourceservice.repository.ResourceTrackingR
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -51,5 +52,15 @@ public class ResourceTrackingServiceImpl implements ResourceTrackingService {
     public void done(int id) {
         final ResourceTracking resourceTracking = new ResourceTracking(id, TrackingStatus.DONE);
         save(resourceTracking);
+    }
+
+    @Override
+    public void delete(int id) {
+        resourceTrackingRepository.deleteById(id);
+    }
+
+    @Override
+    public void deleteAllById(List<Integer> ids) {
+        resourceTrackingRepository.deleteAllByIdInBatch(ids);
     }
 }

@@ -38,7 +38,7 @@ public class ResourceController {
     public ResponseEntity<?> createResource(@MP3Part @RequestPart MultipartFile audioBinary) {
         final int id = storageService.save(audioBinary);
 
-        final Message message = new Message(HttpMethod.GET, "/resources/" + id);
+        final Message message = new Message(HttpMethod.GET, "/resources/" + id, List.of(id));
         messageService.send(message);
 
         final Map<String, Integer> responseMap = new HashMap<>();
@@ -64,8 +64,8 @@ public class ResourceController {
 
         storageService.delete(ids);
 
-        final Message message = new Message(HttpMethod.DELETE, "/resources/ids=" + ids);
-        messageService.send(message);
+//        final Message message = new Message(HttpMethod.DELETE, "/resources/id=" + ids, ids);
+//        messageService.send(message);
 
         final Map<String, List<Integer>> responseMap = new HashMap<>();
         responseMap.put("ids", ids);
